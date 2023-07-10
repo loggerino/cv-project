@@ -59,3 +59,12 @@
 .CVForm .edit-button {
   margin-top: 10px;
 }
+
+.personal {
+  margin-bottom: 20px;
+}
+
+.image-preview img {
+  max-width: 300px;
+  max-height: 300px;
+}
