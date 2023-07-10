@@ -1,61 +1,79 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Personal from './Personal';
 import Education from './Education';
 import Experience from './Experience';
 
-class CVForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            personalImage: null,
-            name: '',
-            email: '',
-            phoneNumber: '',
-            schoolName: '',
-            studyTitle: '',
-            studyDate: '',
-            companyName: '',
-            positionTitle: '',
-            tasks: '',
-            workFrom: '',
-            workUntil: '',
-            isEditing: true,
-        };
-    }
+const CVForm = () => {
+    const [personalImage, setPersonalImage] = useState(null);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [schoolName, setSchoolName] = useState('');
+    const [studyTitle, setStudyTitle] = useState('');
+    const [studyDate, setStudyDate] = useState('');
+    const [companyName, setCompanyName] = useState('');
+    const [positionTitle, setPositionTitle] = useState('');
+    const [tasks, setTasks] = useState('');
+    const [workFrom, setWorkFrom] = useState('');
+    const [workUntil, setWorkUntil] = useState('');
+    const [isEditing, setIsEditing] = useState(true);
 
-    handleImageChange = (e) => {
+    const handleImageChange = (e) => {
         const file = e.target.files[0];
-        this.setState({ personalImage: file });
+        setPersonalImage(file);
     };
 
-    handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        switch (name) {
+            case 'name':
+                setName(value);
+                break;
+            case 'email':
+                setEmail(value);
+                break;
+            case 'phoneNumber':
+                setPhoneNumber(value);
+                break;
+            case 'schoolName':
+                setSchoolName(value);
+                break;
+            case 'studyTitle':
+                setStudyTitle(value);
+                break;
+            case 'studyDate':
+                setStudyDate(value);
+                break;
+            case 'companyName':
+                setCompanyName(value);
+                break;
+            case 'positionTitle':
+                setPositionTitle(value);
+                break;
+            case 'tasks':
+                setTasks(value);
+                break;
+            case 'workFrom':
+                setWorkFrom(value);
+                break;
+            case 'workUntil':
+                setWorkUntil(value);
+                break;
+            default:
+                break;
+        }
     };
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({ isEditing: false });
+        setIsEditing(false);
     };
 
-    handleEdit = () => {
-        this.setState({ isEditing: true });
+    const handleEdit = () => {
+        setIsEditing(true);
     };
 
-    handleDownload = () => {
-        const {
-            name,
-            email,
-            phoneNumber,
-            schoolName,
-            studyTitle,
-            studyDate,
-            companyName,
-            positionTitle,
-            tasks,
-            workFrom,
-            workUntil,
-        } = this.state;
-
+    const handleDownload = () => {
         const cvContent = `Name: ${name}
 Email: ${email}
 Phone Number: ${phoneNumber}
@@ -83,75 +101,63 @@ Work Until: ${workUntil}`;
         URL.revokeObjectURL(url);
     };
 
-    render() {
-        const {
-            name,
-            email,
-            phoneNumber,
-            schoolName,
-            studyTitle,
-            studyDate,
-            companyName,
-            positionTitle,
-            tasks,
-            workFrom,
-            workUntil,
-            personalImage,
-            isEditing,
-        } = this.state;
+    useEffect(() => {
+        document.title = isEditing ? 'CV Form - Edit Mode' : 'CV Form - Preview Mode';
+    }, [isEditing]);
 
-        return (
-            <div className="CVForm">
-                <h1>CV Form</h1>
+    return (
+        <div className="CVForm">
+            <h1>CV Form</h1>
 
-                {isEditing ? (
-                    <form onSubmit={this.handleSubmit}>
-                        <Personal
-                            name={name}
-                            email={email}
-                            phoneNumber={phoneNumber}
-                            personalImage={personalImage}
-                            handleChange={this.handleChange}
-                            handleImageChange={this.handleImageChange}
-                        />
-                        <Education
-                            schoolName={schoolName}
-                            studyTitle={studyTitle}
-                            studyDate={studyDate}
-                            handleChange={this.handleChange}
-                        />
-                        <Experience
-                            companyName={companyName}
-                            positionTitle={positionTitle}
-                            tasks={tasks}
-                            workFrom={workFrom}
-                            workUntil={workUntil}
-                            handleChange={this.handleChange}
-                        />
+            {isEditing ? (
+                <form onSubmit={handleSubmit}>
+                    <Personal
+                        name={name}
+                        email={email}
+                        phoneNumber={phoneNumber}
+                        personalImage={personalImage}
+                        handleChange={handleChange}
+                        handleImageChange={handleImageChange}
+                    />
+                    <Education
+                        schoolName={schoolName}
+                        studyTitle={studyTitle}
+                        studyDate={studyDate}
+                        handleChange={handleChange}
+                    />
+                    <Experience
+                        companyName={companyName}
+                        positionTitle={positionTitle}
+                        tasks={tasks}
+                        workFrom={workFrom}
+                        workUntil={workUntil}
+                        handleChange={handleChange}
+                    />
 
-                        <button type="submit">Generate CV Preview</button>
-                    </form>
-                ) : (
-                    <div>
-                        <h2>CV Preview</h2>
-                        <p>Name: {name}</p>
-                        <p>Email: {email}</p>
-                        <p>Phone Number: {phoneNumber}</p>
-                        <p>School Name: {schoolName}</p>
-                        <p>Study Title: {studyTitle}</p>
-                        <p>Study Date: {studyDate}</p>
-                        <p>Company Name: {companyName}</p>
-                        <p>Position Title: {positionTitle}</p>
-                        <p>Tasks: {tasks}</p>
-                        <p>Work From: {workFrom}</p>
-                        <p>Work Until: {workUntil}</p>
-                        <button onClick={this.handleEdit}>Edit</button>
-                        <button type="button" onClick={this.handleDownload}>Download CV</button>
-                    </div>
-                )}
-            </div>
-        );
-    }
-}
+                    <button type="submit">Generate CV Preview</button>
+                </form>
+            ) : (
+                <div>
+                    <h2>CV Preview</h2>
+                    <p>Name: {name}</p>
+                    <p>Email: {email}</p>
+                    <p>Phone Number: {phoneNumber}</p>
+                    <p>School Name: {schoolName}</p>
+                    <p>Study Title: {studyTitle}</p>
+                    <p>Study Date: {studyDate}</p>
+                    <p>Company Name: {companyName}</p>
+                    <p>Position Title: {positionTitle}</p>
+                    <p>Tasks: {tasks}</p>
+                    <p>Work From: {workFrom}</p>
+                    <p>Work Until: {workUntil}</p>
+                    <button onClick={handleEdit}>Edit</button>
+                    <button type="button" onClick={handleDownload}>
+                        Download CV
+                    </button>
+                </div>
+            )}
+        </div>
+    );
+};
 
 export default CVForm;
