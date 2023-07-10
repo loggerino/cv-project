@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Personal from './Personal';
+import Education from './Education';
+import Experience from './Experience';
 
 class CVForm extends Component {
   constructor(props) {
@@ -54,127 +57,26 @@ class CVForm extends Component {
 
         {isEditing ? (
           <form onSubmit={this.handleSubmit}>
-            {/* General Information Section */}
-            <div>
-              <h2>General Information</h2>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <br />
-              <label>
-                Email:
-                <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <br />
-              <label>
-                Phone Number:
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  value={phoneNumber}
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
-
-            {/* Educational Experience Section */}
-            <div>
-              <h2>Educational Experience</h2>
-              <label>
-                School Name:
-                <input
-                  type="text"
-                  name="schoolName"
-                  value={schoolName}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <br />
-              <label>
-                Study Title:
-                <input
-                  type="text"
-                  name="studyTitle"
-                  value={studyTitle}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <br />
-              <label>
-                Study Date:
-                <input
-                  type="text"
-                  name="studyDate"
-                  value={studyDate}
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
-
-            {/* Practical Experience Section */}
-            <div>
-              <h2>Practical Experience</h2>
-              <label>
-                Company Name:
-                <input
-                  type="text"
-                  name="companyName"
-                  value={companyName}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <br />
-              <label>
-                Position Title:
-                <input
-                  type="text"
-                  name="positionTitle"
-                  value={positionTitle}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <br />
-              <label>
-                Tasks:
-                <input
-                  type="text"
-                  name="tasks"
-                  value={tasks}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <br />
-              <label>
-                Work From:
-                <input
-                  type="text"
-                  name="workFrom"
-                  value={workFrom}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <br />
-              <label>
-                Work Until:
-                <input
-                  type="text"
-                  name="workUntil"
-                  value={workUntil}
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
+            <Personal
+              name={name}
+              email={email}
+              phoneNumber={phoneNumber}
+              handleChange={this.handleChange}
+            />
+            <Education
+              schoolName={schoolName}
+              studyTitle={studyTitle}
+              studyDate={studyDate}
+              handleChange={this.handleChange}
+            />
+            <Experience
+              companyName={companyName}
+              positionTitle={positionTitle}
+              tasks={tasks}
+              workFrom={workFrom}
+              workUntil={workUntil}
+              handleChange={this.handleChange}
+            />
 
             <button type="submit">Generate CV Preview</button>
           </form>
