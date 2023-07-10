@@ -52,7 +52,7 @@ class CVForm extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div className="CVForm">
         <h1>CV Form</h1>
 
         {isEditing ? (
