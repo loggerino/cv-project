@@ -57,16 +57,16 @@ class CVForm extends Component {
         } = this.state;
 
         const cvContent = `Name: ${name}
-            Email: ${email}
-            Phone Number: ${phoneNumber}
-            School Name: ${schoolName}
-            Study Title: ${studyTitle}
-            Study Date: ${studyDate}
-            Company Name: ${companyName}
-            Position Title: ${positionTitle}
-            Tasks: ${tasks}
-            Work From: ${workFrom}
-            Work Until: ${workUntil}`;
+Email: ${email}
+Phone Number: ${phoneNumber}
+School Name: ${schoolName}
+Study Title: ${studyTitle}
+Study Date: ${studyDate}
+Company Name: ${companyName}
+Position Title: ${positionTitle}
+Tasks: ${tasks}
+Work From: ${workFrom}
+Work Until: ${workUntil}`;
 
         const blob = new Blob([cvContent], { type: 'text/plain' });
 
@@ -146,6 +146,7 @@ class CVForm extends Component {
                         <p>Work From: {workFrom}</p>
                         <p>Work Until: {workUntil}</p>
                         <button onClick={this.handleEdit}>Edit</button>
+                        <button type="button" onClick={this.handleDownload}>Download CV</button>
                     </div>
                 )}
             </div>
