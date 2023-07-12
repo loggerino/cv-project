@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Education = ({ schoolName, studyTitle, studyDate, handleChange }) => {
+const Education = ({ schoolName, studyTitle, studyStartDate, studyEndDate, handleChange }) => {
   return (
     <div>
       <h2>Educational Experience</h2>
       <label>
-        School Name:
+        University:
         <input
           type="text"
           name="schoolName"
@@ -15,7 +15,7 @@ const Education = ({ schoolName, studyTitle, studyDate, handleChange }) => {
       </label>
       <br />
       <label>
-        Study Title:
+        Degree:
         <input
           type="text"
           name="studyTitle"
@@ -25,11 +25,21 @@ const Education = ({ schoolName, studyTitle, studyDate, handleChange }) => {
       </label>
       <br />
       <label>
-        Study Date:
+        Study Start Date:
         <input
           type="text"
-          name="studyDate"
-          value={studyDate}
+          name="studyStartDate"
+          value={studyStartDate}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        Study End Date:
+        <input
+          type="text"
+          name="studyEndDate"
+          value={studyEndDate}
           onChange={handleChange}
         />
       </label>

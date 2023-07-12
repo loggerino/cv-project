@@ -7,10 +7,13 @@ const CVForm = () => {
     const [personalImage, setPersonalImage] = useState(null);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [title, setTitle] = useState('');
+    const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [schoolName, setSchoolName] = useState('');
     const [studyTitle, setStudyTitle] = useState('');
-    const [studyDate, setStudyDate] = useState('');
+    const [studyStartDate, setStudyStartDate] = useState('');
+    const [studyEndDate, setStudyEndDate] = useState('');
     const [companyName, setCompanyName] = useState('');
     const [positionTitle, setPositionTitle] = useState('');
     const [tasks, setTasks] = useState('');
@@ -35,14 +38,23 @@ const CVForm = () => {
             case 'phoneNumber':
                 setPhoneNumber(value);
                 break;
+            case 'title':
+                setTitle(value);
+                break;
+            case 'address':
+                setAddress(value);
+                break;
             case 'schoolName':
                 setSchoolName(value);
                 break;
             case 'studyTitle':
                 setStudyTitle(value);
                 break;
-            case 'studyDate':
-                setStudyDate(value);
+            case 'studyStartDate':
+                setStudyStartDate(value);
+                break;
+            case 'studyEndDate':
+                setStudyEndDate(value);
                 break;
             case 'companyName':
                 setCompanyName(value);
@@ -115,6 +127,8 @@ Work Until: ${workUntil}`;
                         name={name}
                         email={email}
                         phoneNumber={phoneNumber}
+                        title={title}
+                        address={address}
                         personalImage={personalImage}
                         handleChange={handleChange}
                         handleImageChange={handleImageChange}
@@ -122,7 +136,8 @@ Work Until: ${workUntil}`;
                     <Education
                         schoolName={schoolName}
                         studyTitle={studyTitle}
-                        studyDate={studyDate}
+                        studyStartDate={studyStartDate}
+                        studyEndDate={studyEndDate}
                         handleChange={handleChange}
                     />
                     <Experience
@@ -142,9 +157,11 @@ Work Until: ${workUntil}`;
                     <p>Name: {name}</p>
                     <p>Email: {email}</p>
                     <p>Phone Number: {phoneNumber}</p>
-                    <p>School Name: {schoolName}</p>
-                    <p>Study Title: {studyTitle}</p>
-                    <p>Study Date: {studyDate}</p>
+                    <p>Title: {title}</p>
+                    <p>Address: {address}</p>
+                    <p>University: {schoolName}</p>
+                    <p>Degree: {studyTitle}</p>
+                    <p>Study Date: {studyStartDate} - {studyEndDate}</p>
                     <p>Company Name: {companyName}</p>
                     <p>Position Title: {positionTitle}</p>
                     <p>Tasks: {tasks}</p>
