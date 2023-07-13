@@ -54,7 +54,7 @@ const CVForm = () => {
             const updatedEducations = [...educations];
             updatedEducations[index][name] = value;
             setEducations(updatedEducations);
-        } else {
+        } else if (name === 'companyName' || name === 'positionTitle' || name === 'tasks' || name === 'workFrom' || name === 'workUntil') {
             const updatedJobs = [...jobs];
             updatedJobs[index][name] = value;
             setJobs(updatedJobs);
@@ -149,60 +149,70 @@ Work Until: ${workUntil}`;
     }, [isEditing]);
 
     return (
-        <div className="CVForm">
-            <h1>CV Form</h1>
-
+        <div className="CVWrapper">
             {isEditing ? (
-                <form onSubmit={handleSubmit}>
-                    <Personal
-                        name={name}
-                        email={email}
-                        phoneNumber={phoneNumber}
-                        title={title}
-                        address={address}
-                        personalImage={personalImage}
-                        handleChange={handleChange}
-                        handleImageChange={handleImageChange}
-                    />
-                    <Education
-                        educations={educations}
-                        handleChange={handleChange}
-                        addEducation={addEducation}
-                        deleteEducation={deleteEducation}
-                    />
-                    <Experience
-                        jobs={jobs}
-                        addJob={addJob}
-                        deleteJob={deleteJob}
-                        handleChange={handleChange}
-                    />
-
-                    <button type="submit">Generate CV Preview</button>
-                </form>
+                <div className="CVForm">
+                    <form onSubmit={handleSubmit}>
+                        <Personal
+                            name={name}
+                            email={email}
+                            phoneNumber={phoneNumber}
+                            title={title}
+                            address={address}
+                            personalImage={personalImage}
+                            handleChange={handleChange}
+                            handleImageChange={handleImageChange}
+                        />
+                        <Education
+                            educations={educations}
+                            handleChange={handleChange}
+                            addEducation={addEducation}
+                            deleteEducation={deleteEducation}
+                        />
+                        <Experience
+                            jobs={jobs}
+                            addJob={addJob}
+                            deleteJob={deleteJob}
+                            handleChange={handleChange}
+                        />
+                        <button type="submit">Generate CV Preview</button>
+                    </form>
+                </div>
             ) : (
-                <div>
-                    <h2>CV Preview</h2>
-                    <p>Name: {name}</p>
-                    <p>Email: {email}</p>
-                    <p>Phone Number: {phoneNumber}</p>
-                    <p>Title: {title}</p>
-                    <p>Address: {address}</p>
-                    {educations.map((education, index) => (
-                        <div key={index}>
-                            <p>University: {education.schoolName}</p>
-                            <p>Degree: {education.studyTitle}</p>
-                            <p>Study Date: {education.studyStartDate} - {education.studyEndDate}</p>
+                <div className="CVPreview">
+                    <header className='head'>
+                        <h1>{name}</h1>
+                        <p>{title}</p>
+                    </header>
+                    <div className="mainPanel">
+                        <div className="education">
+                            <h3>Education</h3>
+                            {educations.map((education, index) => (
+                                <div key={index}>
+                                    <p>University: {education.schoolName}</p>
+                                    <p>Degree: {education.studyTitle}</p>
+                                    <p>Study Date: {education.studyStartDate} - {education.studyEndDate}</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                    {jobs.map((jobs, index) => (
-                        <div key={index}>
-                            <p>Company: {jobs.companyName}</p>
-                            <p>Position: {jobs.positionTitle}</p>
-                            <p>Tasks: {jobs.tasks}</p>
-                            <p>Year Started: {jobs.workFrom}</p>
-                            <p>Year Ended: {jobs.workUntil}</p>
+                        <div className="experience">
+                            <h3>Experience</h3>
+                            {jobs.map((jobs, index) => (
+                                <div key={index}>
+                                    <p>Company: {jobs.companyName}</p>
+                                    <p>Position: {jobs.positionTitle}</p>
+                                    <p>Tasks: {jobs.tasks}</p>
+                                    <p>Year: {jobs.workFrom} - {jobs.workUntil}</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
+                    <div className="sidePanel">
+                        <img src={URL.createObjectURL(personalImage)} alt="Personal" />
+                        <p>Email: {email}</p>
+                        <p>Phone Number: {phoneNumber}</p>
+                        <p>Address: {address}</p>
+                    </div>
                     <button onClick={handleEdit}>Edit</button>
                     <button type="button" onClick={handleDownload}>
                         Download CV
