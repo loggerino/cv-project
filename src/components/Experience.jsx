@@ -27,16 +27,6 @@ const Experience = ({ jobs, handleChange, addJob, deleteJob }) => {
           </label>
           <br />
           <label>
-            Tasks:
-            <input
-              type="text"
-              name="tasks"
-              value={job.tasks}
-              onChange={(e) => handleChange(e, index)}
-            />
-          </label>
-          <br />
-          <label>
             Work From:
             <input
               type="text"

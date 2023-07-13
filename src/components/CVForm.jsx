@@ -10,15 +10,15 @@ const CVForm = () => {
     const [title, setTitle] = useState('');
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [description, setDescription] = useState('');
     const [educations, setEducations] = useState([{ schoolName: '', studyTitle: '', studyStartDate: '', studyEndDate: '' }]);
     const [schoolName, setSchoolName] = useState('');
     const [studyTitle, setStudyTitle] = useState('');
     const [studyStartDate, setStudyStartDate] = useState('');
     const [studyEndDate, setStudyEndDate] = useState('');
-    const [jobs, setJobs] = useState([{ companyName: '', positionTitle: '', tasks: '', workFrom: '', workUntil: '' }]);
+    const [jobs, setJobs] = useState([{ companyName: '', positionTitle: '', workFrom: '', workUntil: '' }]);
     const [companyName, setCompanyName] = useState('');
     const [positionTitle, setPositionTitle] = useState('');
-    const [tasks, setTasks] = useState('');
     const [workFrom, setWorkFrom] = useState('');
     const [workUntil, setWorkUntil] = useState('');
     const [isEditing, setIsEditing] = useState(true);
@@ -34,7 +34,7 @@ const CVForm = () => {
     };
 
     const addJob = () => {
-        setJobs([...jobs, { companyName: '', positionTitle: '', tasks: '', workFrom: '', workUntil: '' }]);
+        setJobs([...jobs, { companyName: '', positionTitle: '', workFrom: '', workUntil: '' }]);
     };
 
     const deleteJob = (index) => {
@@ -54,7 +54,7 @@ const CVForm = () => {
             const updatedEducations = [...educations];
             updatedEducations[index][name] = value;
             setEducations(updatedEducations);
-        } else if (name === 'companyName' || name === 'positionTitle' || name === 'tasks' || name === 'workFrom' || name === 'workUntil') {
+        } else if (name === 'companyName' || name === 'positionTitle' || name === 'workFrom' || name === 'workUntil') {
             const updatedJobs = [...jobs];
             updatedJobs[index][name] = value;
             setJobs(updatedJobs);
@@ -75,6 +75,9 @@ const CVForm = () => {
             case 'address':
                 setAddress(value);
                 break;
+            case 'description':
+                setDescription(value);
+                break;
             case 'schoolName':
                 setSchoolName(value);
                 break;
@@ -92,9 +95,6 @@ const CVForm = () => {
                 break;
             case 'positionTitle':
                 setPositionTitle(value);
-                break;
-            case 'tasks':
-                setTasks(value);
                 break;
             case 'workFrom':
                 setWorkFrom(value);
@@ -116,32 +116,8 @@ const CVForm = () => {
         setIsEditing(true);
     };
 
-    const handleDownload = () => {
-        const cvContent = `Name: ${name}
-Email: ${email}
-Phone Number: ${phoneNumber}
-School Name: ${schoolName}
-Study Title: ${studyTitle}
-Study Date: ${studyDate}
-Company Name: ${companyName}
-Position Title: ${positionTitle}
-Tasks: ${tasks}
-Work From: ${workFrom}
-Work Until: ${workUntil}`;
-
-        const blob = new Blob([cvContent], { type: 'text/plain' });
-
-        const url = URL.createObjectURL(blob);
-
-        const downloadLink = document.createElement('a');
-        downloadLink.href = url;
-        downloadLink.download = 'cv.txt';
-
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-
-        document.body.removeChild(downloadLink);
-        URL.revokeObjectURL(url);
+    const handlePrint = () => {
+        window.print();
     };
 
     useEffect(() => {
@@ -162,6 +138,7 @@ Work Until: ${workUntil}`;
                             phoneNumber={phoneNumber}
                             title={title}
                             address={address}
+                            description={description}
                             personalImage={personalImage}
                             handleChange={handleChange}
                             handleImageChange={handleImageChange}
@@ -188,24 +165,38 @@ Work Until: ${workUntil}`;
                         <p>{title}</p>
                     </header>
                     <div className="mainPanel">
+                        <div className="description">
+                            <h3>Description</h3>
+                            <hr />
+                            <p>{description}</p>
+                        </div>
                         <div className="education">
                             <h3>Education</h3>
+                            <hr />
                             {educations.map((education, index) => (
-                                <div key={index}>
-                                    <p>University: {education.schoolName}</p>
-                                    <p>Degree: {education.studyTitle}</p>
-                                    <p>Study Date: {education.studyStartDate} - {education.studyEndDate}</p>
+                                <div key={index} className="education-item">
+                                    <div className="education-date">
+                                        <p>{education.studyStartDate} - {education.studyEndDate}</p>
+                                    </div>
+                                    <div className="education-info">
+                                        <p className='schoolName'>{education.schoolName}</p>
+                                        <p>Degree: {education.studyTitle}</p>
+                                    </div>
                                 </div>
                             ))}
                         </div>
                         <div className="experience">
                             <h3>Experience</h3>
-                            {jobs.map((jobs, index) => (
-                                <div key={index}>
-                                    <p>Company: {jobs.companyName}</p>
-                                    <p>Position: {jobs.positionTitle}</p>
-                                    <p>Tasks: {jobs.tasks}</p>
-                                    <p>Year: {jobs.workFrom} - {jobs.workUntil}</p>
+                            <hr />
+                            {jobs.map((job, index) => (
+                                <div key={index} className="experience-item">
+                                    <div className="experience-date">
+                                        <p>{job.workFrom} - {job.workUntil}</p>
+                                    </div>
+                                    <div className="experience-info">
+                                        <p className='positionTitle'>{job.positionTitle}</p>
+                                        <p>{job.companyName}</p>
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -226,9 +217,7 @@ Work Until: ${workUntil}`;
                         </div>
                     </div>
                     <button onClick={handleEdit}>Edit</button>
-                    <button type="button" onClick={handleDownload}>
-                        Download CV
-                    </button>
+                    <button onClick={handlePrint}>Save a copy</button>
                 </div>
             )}
         </div>

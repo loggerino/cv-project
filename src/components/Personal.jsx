@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Personal = ({ name, email, phoneNumber, title, address, personalImage, handleChange, handleImageChange }) => {
+const Personal = ({ name, email, phoneNumber, title, address, description, personalImage, handleChange, handleImageChange }) => {
   return (
     <div className='personal'>
       <h2>General Information</h2>
@@ -50,6 +50,16 @@ const Personal = ({ name, email, phoneNumber, title, address, personalImage, han
           type="text"
           name="address"
           value={address}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        Description:
+        <input
+          type="text"
+          name="description"
+          value={description}
           onChange={handleChange}
         />
       </label>
