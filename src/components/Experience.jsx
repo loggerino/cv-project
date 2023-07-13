@@ -59,6 +59,7 @@ const Experience = ({ jobs, handleChange, addJob, deleteJob }) => {
           {jobs.length > 1 && (
             <button type="button" onClick={() => deleteJob(index)}>Delete Job</button>
           )}
+          <hr />
         </div>
       ))}
       <br />

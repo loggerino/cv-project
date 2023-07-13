@@ -10,12 +10,12 @@ const CVForm = () => {
     const [title, setTitle] = useState('');
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [educations, setEducations] = useState([]);
+    const [educations, setEducations] = useState([{ schoolName: '', studyTitle: '', studyStartDate: '', studyEndDate: '' }]);
     const [schoolName, setSchoolName] = useState('');
     const [studyTitle, setStudyTitle] = useState('');
     const [studyStartDate, setStudyStartDate] = useState('');
     const [studyEndDate, setStudyEndDate] = useState('');
-    const [jobs, setJobs] = useState([]);
+    const [jobs, setJobs] = useState([{ companyName: '', positionTitle: '', tasks: '', workFrom: '', workUntil: '' }]);
     const [companyName, setCompanyName] = useState('');
     const [positionTitle, setPositionTitle] = useState('');
     const [tasks, setTasks] = useState('');
@@ -152,6 +152,9 @@ Work Until: ${workUntil}`;
         <div className="CVWrapper">
             {isEditing ? (
                 <div className="CVForm">
+                    <div className="title">
+                        CV BUILDER
+                    </div>
                     <form onSubmit={handleSubmit}>
                         <Personal
                             name={name}
@@ -209,9 +212,18 @@ Work Until: ${workUntil}`;
                     </div>
                     <div className="sidePanel">
                         <img src={URL.createObjectURL(personalImage)} alt="Personal" />
-                        <p>Email: {email}</p>
-                        <p>Phone Number: {phoneNumber}</p>
-                        <p>Address: {address}</p>
+                        <div className="email">
+                            <h4>Email</h4>
+                            {email}
+                        </div>
+                        <div className="phone">
+                            <h4>Phone</h4>
+                            {phoneNumber}
+                        </div>
+                        <div className="address">
+                            <h4>Address</h4>
+                            {address}
+                        </div>
                     </div>
                     <button onClick={handleEdit}>Edit</button>
                     <button type="button" onClick={handleDownload}>
