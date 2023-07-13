@@ -109,6 +109,7 @@ button {
 
 .description {
   display: flex;
+  text-align: justify;
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 2rem;
@@ -156,3 +157,36 @@ button {
 .positionTitle {
   font-weight: bold;
 }
+
+@media screen and (max-width: 600px) {
+  .CVForm,
+  .CVPreview {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .CVPreview {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .head,
+  .description,
+  .education,
+  .experience,
+  .sidePanel {
+    padding: 1rem;
+  }
+
+  .CVForm input,
+  .CVForm button,
+  .CVPreview img,
+  .CVPreview .sidePanel {
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
+
