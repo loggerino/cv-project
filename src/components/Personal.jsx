@@ -11,6 +11,7 @@ const Personal = ({ name, email, phoneNumber, title, address, description, perso
           name="name"
           value={name}
           onChange={handleChange}
+          required
         />
       </label>
       <br />
@@ -21,6 +22,7 @@ const Personal = ({ name, email, phoneNumber, title, address, description, perso
           name="email"
           value={email}
           onChange={handleChange}
+          required
         />
       </label>
       <br />
@@ -31,6 +33,7 @@ const Personal = ({ name, email, phoneNumber, title, address, description, perso
           name="phoneNumber"
           value={phoneNumber}
           onChange={handleChange}
+          required
         />
       </label>
       <br />
@@ -41,6 +44,7 @@ const Personal = ({ name, email, phoneNumber, title, address, description, perso
           name="title"
           value={title}
           onChange={handleChange}
+          required
         />
       </label>
       <br />
@@ -51,6 +55,7 @@ const Personal = ({ name, email, phoneNumber, title, address, description, perso
           name="address"
           value={address}
           onChange={handleChange}
+          required
         />
       </label>
       <br />
@@ -61,12 +66,13 @@ const Personal = ({ name, email, phoneNumber, title, address, description, perso
           name="description"
           value={description}
           onChange={handleChange}
+          required
         />
       </label>
       <br />
       <label>
         Personal Image:
-        <input type="file" accept="image/*" onChange={handleImageChange} />
+        <input type="file" accept="image/*" onChange={handleImageChange} required/>
       </label>
       {personalImage && (
         <div className='image-preview'>
